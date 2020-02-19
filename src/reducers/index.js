@@ -1,4 +1,4 @@
-export const intialState = {
+    const initialState = {
     additionalPrice: 0,
     car: {
       price: 26395,
@@ -15,15 +15,19 @@ export const intialState = {
     ]
   };
 
-  export const featureReducer = (state, action) =>{
-      console.log(action);
+  export const reducer = (state = initialState, action) =>{
+      console.log("I am the action", action);
       switch (action.type){
           //add different cases here
             case 'ADD_FEATURE':
+                if(state.car.features.find(i => i.id === action.payload.id)){
+                    return state;
+                }
                return{
                    ...state,
+                   additionalPrice: state.additionalPrice + action.payload.price,
                    car:{...state.car,
-                        price:state.car.price + action.payload.price,
+                        // price:state.car.price + action.payload.price,
                         features:[...state.car.features, action.payload]
                         }
               }
@@ -31,9 +35,11 @@ export const intialState = {
             case 'REMOVE_FEATURE':
                 return{
                     ...state,
-                    car:{...state.car,
-                        price: state.car.price - action.payload.price,
-                        features:[]
+                    additionalPrice: state.additionalPrice - action.payload.price,
+                    car:{...state.car,                        
+                        features:state.car.features.filter(i =>(
+                            i.id!==action.payload.id
+                        ))                        
                     }
                }
 

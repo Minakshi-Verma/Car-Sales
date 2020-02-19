@@ -1,15 +1,18 @@
-  const buyFeature = (feature) => {
+ 
+ import React from 'react';
+
+ export const buyFeature = (item) => {
     // dipsatch an action here to add an item
     return{
         type: 'ADD_FEATURE',
-        payload: feature
+        payload: item
     }
   };
-  
-  const removeFeature = (feature) => {
+
+  export const removeFeature = (item) => {
     // dispatch an action here to remove an item
     return{
         type:'REMOVE_FEATURE',
-        payload: feature
+        payload: item
     }
   };
